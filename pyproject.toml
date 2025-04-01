@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+maintainers = [
+    {name = "Daan Rooze", email = "daan.rooze@deltares.nl"},
+    {name = "Roel Melman", email = "roel.melman@deltares.nl"},
+]
+dependencies = []
+description = "Package to process and visualize (groundwater) diver data"
+name = "DiverDataProcessor"
+requires-python = ">= 3.12"
+version = "1.0.0"
+readme = "README.md"
+license = {file = "LICENSE"}
+
+[project.urls]
+Repository = "https://github.com/daanrooze/DiverDataProcessor.git"
+
+[tool.hatch.version]
+path = "DiverDataProcessor/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["DiverDataProcessor"]
+
+[tool.hatch.build.targets.sdist]
+only-include = ["DiverDataProcessor", "tests"]
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[tool.pixi.dependencies]
+python = ">=3.12"
+pip = "*"
+numpy = "*"
+pandas = "*"
+geopandas = "*"
+netcdf4 = "*"
+h5netcdf = "*"
+xarray = "*"
+black = "*"
+ruff = "*"
+pytest = ">=8.3.5,<9"
+pytest-cov = "*"
+contextily = ">=1.6.2,<2"
+
+[tool.pixi.pypi-dependencies]
+DiverDataProcessor = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+format = "black ."
+lint = "ruff check --fix ./DiverDataProcessor"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+markers = [
+	"unittest: test of single component",
+	"integrationtest: test of multiple components",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+]
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "N", "I001", "NPY201"]
+ignore = ["F401", "E501", "F811"]
+unfixable = ["F401"]
+pydocstyle.convention = "numpy"
