@@ -76,6 +76,6 @@ fig.plot_water_level()
 # Optionally, add precipitation bars to the figure
 fig.plot_precipitation()
 ```
-```
+
 
 
