@@ -12,6 +12,18 @@ pixi install .
 
 For more information about Pixi, visit: [https://pixi.sh/latest/](https://pixi.sh/latest/)
 
+Alternatively, use conda/mamba to install the environment for development:
+
+```
+conda env create -f environment.yml
+```
+
+Then activate the created environment (called ‘DiverDataProcessor’) and perform a developer install with pip:
+
+```
+pip install -e .
+```
+
 ## Usage
 
 ### Base & Readers
