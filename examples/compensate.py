@@ -1,10 +1,14 @@
 import pandas as pd
+from pathlib import Path
 
 import DiverDataProcessor as ddp
 from DiverDataProcessor import figures, processing
 
-path_metadata = r"data/metadata.xlsx"
-path_baro = r"data/BARO.csv"
+projectdir = Path(r"c:\repos\DiverDataProcessor\tmp")
+
+path_metadata = projectdir.joinpath("data", "metadata.xlsx")
+path_baro = projectdir.joinpath("data", "BARO.CSV")
+path_divers = projectdir.joinpath("data", 'diver_data')
 
 start_date = "2024-03-01"
 end_date = "2024-06-30"
@@ -19,7 +23,7 @@ for diver in divers:
     metadata_well = metadata.loc[diver]
     geology_well = pd.read_excel(path_metadata, sheet_name=f"geology_{diver}")
 
-    path_diver = f"data/{diver}.csv"
+    path_diver = next(path_divers.glob(f"*{metadata_well.name}*.CSV"), None)
 
     diver = ddp.read_td_diver(path_diver)
     diver = diver.reindex_time(start_date, end_date)
@@ -47,6 +51,9 @@ for diver in divers:
         observation_well,
         method="cable",
     )
+
+    path_csv = projectdir.joinpath(f"exports/{metadata_well.name}.csv")
+    water_level.data.to_csv(path_csv) # output in meters +datum
 
     fig = figures.GeologyGroundwater(observation_well, figsize=(8.27, 11.69 / 2))
     fig.plot_geology(geology, units="m")
