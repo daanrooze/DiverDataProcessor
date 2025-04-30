@@ -4,7 +4,7 @@ from pathlib import Path
 import DiverDataProcessor as ddp
 from DiverDataProcessor import figures, processing
 
-projectdir = Path(r"c:\repos\DiverDataProcessor\tmp")
+projectdir = Path(r"c:\...\...\...")
 
 path_metadata = projectdir.joinpath("data", "metadata.xlsx")
 path_baro = projectdir.joinpath("data", "BARO.CSV")
