@@ -3,4 +3,4 @@ import DiverDataProcessor.figures
 import DiverDataProcessor.processing
 import DiverDataProcessor.readers
 from DiverDataProcessor.base import Geology, HandReading, ObservationWell, Timeseries
-from DiverDataProcessor.readers import read_baro_diver, read_ec_diver, read_td_diver, fetch_air_pressure
+from DiverDataProcessor.readers import read_baro_diver, read_ec_diver, read_td_diver, read_diver_link, fetch_air_pressure
